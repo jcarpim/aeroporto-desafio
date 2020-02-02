@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
+import com.desafio.aeroporto.enums.Operadora;
 import com.desafio.aeroporto.exception.VooException;
 import com.desafio.aeroporto.model.Voo;
 import com.desafio.aeroporto.repository.VooRepository;
@@ -20,25 +21,6 @@ import com.opencsv.CSVReaderBuilder;
 @Repository
 public class VooUberRepositoryImpl extends VooTemplate implements VooRepository {
 
-	private List<Voo> carregarListaVoos() throws VooException {
-		List<Voo> flyies = new ArrayList<Voo>();
-		try {
-
-			Reader reader = Files.newBufferedReader(
-					Paths.get("C:" + File.separator + "desafio" + File.separator + "uberair.csv"));
-
-			CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
-
-			List<String[]> linhas = csvReader.readAll();
-
-			linhas.forEach(it -> flyies.add(
-					new Voo(it[0], it[1], it[2], formatSerializeDateVoo(it[3]), it[4], it[5], Double.valueOf(it[6]))));
-		} catch (Exception e) {
-			throw new VooException(e.getMessage(), e.getCause());
-		}
-		return flyies;
-	}
-	
 	@Override
 	public List<Voo> search(String origem, String destino, LocalDateTime dataVoo) throws VooException {
 		final List<Voo> escalasOrganizadas = new ArrayList<Voo>();
@@ -55,5 +37,23 @@ public class VooUberRepositoryImpl extends VooTemplate implements VooRepository 
 
 	}
 
+	private List<Voo> carregarListaVoos() throws VooException {
+		List<Voo> flyies = new ArrayList<Voo>();
+		try {
+
+			Reader reader = Files.newBufferedReader(
+					Paths.get("C:" + File.separator + "desafio-tegra" + File.separator + "uberair.csv"));
+
+			CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
+
+			List<String[]> linhas = csvReader.readAll();
+
+			linhas.forEach(it -> flyies.add(new Voo(it[0], it[1], it[2], formatSerializeDateVoo(it[3]), it[4], it[5],
+					Double.valueOf(it[6]), Operadora.UBER.getLabel())));
+		} catch (Exception e) {
+			throw new VooException(e.getMessage(), e.getCause());
+		}
+		return flyies;
+	}
 
 }

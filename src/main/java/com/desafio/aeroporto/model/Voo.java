@@ -16,16 +16,18 @@ public class Voo implements Serializable {
 
 	private String origem;
 	private String destino;
+
 	private LocalDateTime dataSaida;
 	private String saida;
 	private String chegada;
 	private Double valor;
+	private String operadora;
 
 	public Voo() {
 	}
 
 	public Voo(String voo, String origem, String destino, LocalDateTime dataSaida, String saida, String chegada,
-			Double valor) {
+			Double valor, String operadora) {
 		super();
 		this.voo = voo;
 		this.origem = origem;
@@ -34,6 +36,7 @@ public class Voo implements Serializable {
 		this.saida = saida;
 		this.chegada = chegada;
 		this.valor = valor;
+		this.operadora = operadora;
 		System.out.println(toString());
 	}
 
@@ -63,6 +66,14 @@ public class Voo implements Serializable {
 
 	public Double getValor() {
 		return valor;
+	}
+
+	public String getOperadora() {
+		return operadora;
+	}
+
+	public void setOperadora(String operadora) {
+		this.operadora = operadora;
 	}
 
 	@Override

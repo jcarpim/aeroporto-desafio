@@ -13,28 +13,30 @@ import java.util.stream.Collectors;
 import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.stereotype.Repository;
 
+import com.desafio.aeroporto.enums.Operadora;
 import com.desafio.aeroporto.exception.VooException;
 import com.desafio.aeroporto.model.Voo;
 import com.desafio.aeroporto.repository.VooRepository;
 import com.google.gson.internal.LinkedTreeMap;
 @Repository
 public class Voo99RepositoryImpl extends VooTemplate implements VooRepository {
-	
+
 	private List<Voo> carregarListaVoo() throws VooException {
 		String json;
 		List<Voo> voos = new ArrayList<Voo>();
 		try {
 			json = String.join(" ",
 					Files.readAllLines(
-							Paths.get("C:" + File.separator + "desafio" + File.separator + "99planes.json"),
+							Paths.get("C:" + File.separator + "desafio-tegra" + File.separator + "99planes.json"),
 							StandardCharsets.UTF_8));
 			List<Object> list = new GsonJsonParser().parseList(json);
 			list.forEach(it -> {
 				LinkedTreeMap<String, Object> linha = (LinkedTreeMap<String, Object>) it;
 				Double valor = (Double) linha.get("valor");
 				voos.add(new Voo(linha.get("voo").toString(), linha.get("origem").toString(),
-						linha.get("destino").toString(),formatSerializeDateVoo(linha.get("data_saida").toString()),
-						linha.get("saida").toString(), linha.get("chegada").toString(), valor));
+						linha.get("destino").toString(), formatSerializeDateVoo(linha.get("data_saida").toString()),
+						linha.get("saida").toString(), linha.get("chegada").toString(), valor,
+						Operadora.NOVE_NOVE.getLabel()));
 
 			});
 		} catch (IOException e) {
