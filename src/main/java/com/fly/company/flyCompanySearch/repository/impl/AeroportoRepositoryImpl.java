@@ -32,7 +32,7 @@ public class AeroportoRepositoryImpl implements AeroportoRepository {
 							StandardCharsets.UTF_8));
 			List<Object> list = new GsonJsonParser().parseList(json);
 			list.forEach(aeroporto -> {
-				
+				aeroportos.addAll()
 			});
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
