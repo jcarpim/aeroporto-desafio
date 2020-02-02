@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.desafio.aeroporto.exception.VooException;
+import com.desafio.aeroporto.model.Viagem;
 import com.desafio.aeroporto.model.Voo;
 import com.desafio.aeroporto.repository.VooRepository;
 
@@ -15,12 +16,12 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class VooServiceImpl implements VooService {
+public class ViagemServiceImpl implements ViagemService {
 	@Autowired
 	List<VooRepository> voosRepository;
 
 	@Override
-	public List<Voo> search(String origem, String destino, LocalDateTime dataVoo) {
+	public Viagem procurar(String origem, String destino, LocalDateTime dataVoo) {
 		final List<Voo> voos = new ArrayList<Voo>();
 		voosRepository.forEach(repository -> {
 			try {
@@ -29,7 +30,8 @@ public class VooServiceImpl implements VooService {
 				e.printStackTrace();
 			}
 		});
-		return voos;
+		Viagem viagem = new Viagem(origem, destino, dataVoo, dataVoo, voos);
+		return viagem;
 	}
 
 }

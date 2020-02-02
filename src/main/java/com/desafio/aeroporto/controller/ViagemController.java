@@ -12,27 +12,26 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.desafio.aeroporto.model.Aeroporto;
 import com.desafio.aeroporto.model.PesquisaVooRequest;
-import com.desafio.aeroporto.model.Voo;
+import com.desafio.aeroporto.model.Viagem;
 import com.desafio.aeroporto.service.AeroportoService;
-import com.desafio.aeroporto.service.VooService;
+import com.desafio.aeroporto.service.ViagemService;
 
 @RestController
 @RequestMapping("/api/vl/voos")
-public class VooController {
+public class ViagemController {
 	@Autowired
-	private VooService vooService;
-
-	@PostMapping(path = "/search", consumes = "application/json", produces = "application/json")
-	public ResponseEntity<List<Voo>> search(@RequestBody PesquisaVooRequest request) {
-		return ResponseEntity.ok()
-				.body(vooService.search(request.getOrigem(), request.getDestino(), request.getDataVoo()));
-	}
-	
-	@Autowired 
+	private ViagemService viagemService;
+	@Autowired
 	private AeroportoService aeroportoService;
-	
-	@GetMapping(path = "/aeroportos", produces = "application/json")
-	public ResponseEntity<List<Aeroporto>> carregarTodos() {
+
+	@PostMapping(path = "/procurar", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<Viagem> search(@RequestBody PesquisaVooRequest request) {
+		return ResponseEntity.ok()
+				.body(viagemService.procurar(request.getOrigem(), request.getDestino(), request.getDataVoo()));
+	}
+
+	@GetMapping(path = "/aeroportos",  produces = "application/json")
+	public ResponseEntity<List<Aeroporto>> carregarTodosAeroportos() {
 		return ResponseEntity.ok().body(aeroportoService.carregarTodos());
 	}
 
