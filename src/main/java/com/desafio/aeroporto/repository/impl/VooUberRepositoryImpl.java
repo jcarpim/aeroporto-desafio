@@ -42,7 +42,7 @@ public class VooUberRepositoryImpl extends VooTemplate implements VooRepository 
 		try {
 
 			Reader reader = Files.newBufferedReader(
-					Paths.get("C:" + File.separator + "desafio-tegra" + File.separator + "uberair.csv"));
+					Paths.get("C:" + File.separator + "desafio" + File.separator + "uberair.csv"));
 
 			CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
 

@@ -27,7 +27,7 @@ public class Voo99RepositoryImpl extends VooTemplate implements VooRepository {
 		try {
 			json = String.join(" ",
 					Files.readAllLines(
-							Paths.get("C:" + File.separator + "desafio-tegra" + File.separator + "99planes.json"),
+							Paths.get("C:" + File.separator + "desafio" + File.separator + "99planes.json"),
 							StandardCharsets.UTF_8));
 			List<Object> list = new GsonJsonParser().parseList(json);
 			list.forEach(it -> {
