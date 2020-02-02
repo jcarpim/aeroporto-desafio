@@ -1,9 +1,9 @@
-package com.fly.company.flyCompanySearch.repository.impl;
+package com.desafio.aeroporto.repository.impl;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import com.fly.company.flyCompanySearch.model.Voo;
+import com.desafio.aeroporto.model.Voo;
 
 public abstract class VooTemplate {
 

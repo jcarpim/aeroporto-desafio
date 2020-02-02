@@ -1,10 +1,10 @@
-package com.fly.company.flyCompanySearch.model;
+package com.desafio.aeroporto.model;
 
 import java.time.LocalDateTime;
 
+import com.desafio.aeroporto.repository.util.MultiDateDeserializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fly.company.flyCompanySearch.repository.util.MultiDateDeserializer;
 
 public class PesquisaVooRequest {
 	@JsonProperty(value = "origem")

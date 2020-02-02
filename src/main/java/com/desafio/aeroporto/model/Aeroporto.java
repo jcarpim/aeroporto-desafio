@@ -1,4 +1,4 @@
-package com.fly.company.flyCompanySearch.model;
+package com.desafio.aeroporto.model;
 
 import java.io.Serializable;
 

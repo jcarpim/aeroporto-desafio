@@ -1,4 +1,4 @@
-package com.fly.company.flyCompanySearch.exception;
+package com.desafio.aeroporto.exception;
 
 public class VooException extends Exception {
 

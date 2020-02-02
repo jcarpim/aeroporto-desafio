@@ -1,4 +1,4 @@
-package com.fly.company.flyCompanySearch.repository.impl;
+package com.desafio.aeroporto.repository.impl;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.stereotype.Repository;
 
-import com.fly.company.flyCompanySearch.exception.VooException;
-import com.fly.company.flyCompanySearch.model.Voo;
-import com.fly.company.flyCompanySearch.repository.VooRepository;
+import com.desafio.aeroporto.exception.VooException;
+import com.desafio.aeroporto.model.Voo;
+import com.desafio.aeroporto.repository.VooRepository;
 import com.google.gson.internal.LinkedTreeMap;
 @Repository
-public class Voo99RepositoryImpl extends VooTemplate implements VooRepository {
+public class VooRepositoryImpl extends VooTemplate implements VooRepository {
 	
 	private List<Voo> carregarListaVoo() throws VooException {
 		String json;

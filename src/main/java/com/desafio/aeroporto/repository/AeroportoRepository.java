@@ -1,11 +1,12 @@
-package com.fly.company.flyCompanySearch.repository;
+package com.desafio.aeroporto.repository;
 
 import java.util.List;
 
-import com.fly.company.flyCompanySearch.model.Aeroporto;
+import com.desafio.aeroporto.model.Aeroporto;
 
 public interface AeroportoRepository {
 	
 	public List<Aeroporto> carregarTodos();
+
 	
 }

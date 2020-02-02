@@ -1,4 +1,4 @@
-package com.fly.company.flyCompanySearch.repository.impl;
+package com.desafio.aeroporto.repository.impl;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,37 +9,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.boot.json.GsonJsonParser;
+import org.springframework.stereotype.Repository;
 
-import com.fly.company.flyCompanySearch.model.Aeroporto;
-import com.fly.company.flyCompanySearch.repository.AeroportoRepository;
+import com.desafio.aeroporto.model.Aeroporto;
+import com.desafio.aeroporto.repository.AeroportoRepository;
+import com.google.gson.internal.LinkedTreeMap;
 
+@Repository
 public class AeroportoRepositoryImpl implements AeroportoRepository {
 
 	@Override
 	public List<Aeroporto> carregarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		return carregarJson();
 	}
-	
-	private List<Aeroporto> carregarJson(){
+
+	private List<Aeroporto> carregarJson() {
 		String json = new String();
 		List<Aeroporto> aeroportos = new ArrayList<Aeroporto>();
-		
+
 		try {
 			json = String.join(" ",
-					Files.readAllLines(
-							Paths.get("C:" + File.separator + "desafio" + File.separator + "99planes.json"),
+					Files.readAllLines(Paths.get("C:" + File.separator + "desafio" + File.separator + "aeroportos.json"),
 							StandardCharsets.UTF_8));
 			List<Object> list = new GsonJsonParser().parseList(json);
 			list.forEach(aeroporto -> {
-				aeroportos.addAll()
+				LinkedTreeMap<String, Object> linha = (LinkedTreeMap<String, Object>) aeroporto;
+
+				aeroportos.add(new Aeroporto(linha.get("nome").toString(), linha.get("aeroporto").toString(),
+						linha.get("cidade").toString()));
 			});
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return aeroportos;
-		
+
 	}
 
 }

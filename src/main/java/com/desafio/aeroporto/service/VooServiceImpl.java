@@ -1,4 +1,4 @@
-package com.fly.company.flyCompanySearch.service;
+package com.desafio.aeroporto.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -7,9 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fly.company.flyCompanySearch.exception.VooException;
-import com.fly.company.flyCompanySearch.model.Voo;
-import com.fly.company.flyCompanySearch.repository.VooRepository;
+import com.desafio.aeroporto.exception.VooException;
+import com.desafio.aeroporto.model.Voo;
+import com.desafio.aeroporto.repository.VooRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
