@@ -7,5 +7,14 @@ C:\desafio
     99planes.json / 
     aeroportos.json / 
     uberair.csv 
+
      
 O projeto está localizado na porta 8082.
+
+
+Json de entrada:
+{
+	"origem": "BSB",
+    "destino": "VCP",
+    "data_voo": "2019-02-10"
+}
