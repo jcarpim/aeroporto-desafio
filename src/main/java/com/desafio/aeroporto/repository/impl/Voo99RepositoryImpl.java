@@ -18,7 +18,7 @@ import com.desafio.aeroporto.model.Voo;
 import com.desafio.aeroporto.repository.VooRepository;
 import com.google.gson.internal.LinkedTreeMap;
 @Repository
-public class VooRepositoryImpl extends VooTemplate implements VooRepository {
+public class Voo99RepositoryImpl extends VooTemplate implements VooRepository {
 	
 	private List<Voo> carregarListaVoo() throws VooException {
 		String json;
@@ -45,9 +45,17 @@ public class VooRepositoryImpl extends VooTemplate implements VooRepository {
 
 	@Override
 	public List<Voo> search(String origem, String destino, LocalDateTime dataVoo) throws VooException {
-
+		final List<Voo> escalasOrganizadas = new ArrayList<Voo>();
 		List<Voo> voos = carregarListaVoo();
-		return voos.stream().filter(it -> isRightFly(it, origem, destino, dataVoo)).collect(Collectors.toList());
+
+		List<Voo> escalas = voos.stream().filter(voo -> isScalaFly(voo, origem, destino, dataVoo))
+				.collect(Collectors.toList());
+
+		List<Voo> voosUnicos = voos.stream().filter(voo -> isRightFly(voo, origem, destino, dataVoo))
+				.collect(Collectors.toList());
+		escalasOrganizadas.addAll(organizaEscala(escalas));
+
+		return escalasOrganizadas.size() == 0 ? voosUnicos : escalasOrganizadas;
 	}
 
 }

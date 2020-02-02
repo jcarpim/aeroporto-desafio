@@ -20,19 +20,6 @@ import com.opencsv.CSVReaderBuilder;
 @Repository
 public class VooUberRepositoryImpl extends VooTemplate implements VooRepository {
 
-	@Override
-	public List<Voo> search(String origem, String destino, LocalDateTime dataVoo) throws VooException {
-		List<Voo> flyiesAtual = new ArrayList<Voo>();
-		try {
-			List<Voo> flyies = carregarListaVoos();
-			flyiesAtual = flyies.stream().filter(it -> isRightFly(it, origem, destino, dataVoo))
-					.collect(Collectors.toList());
-		} catch (Exception e) {
-			throw new VooException(e.getMessage(), e.getCause());
-		}
-		return flyiesAtual;
-	}
-
 	private List<Voo> carregarListaVoos() throws VooException {
 		List<Voo> flyies = new ArrayList<Voo>();
 		try {
@@ -51,5 +38,22 @@ public class VooUberRepositoryImpl extends VooTemplate implements VooRepository 
 		}
 		return flyies;
 	}
+	
+	@Override
+	public List<Voo> search(String origem, String destino, LocalDateTime dataVoo) throws VooException {
+		final List<Voo> escalasOrganizadas = new ArrayList<Voo>();
+		List<Voo> voos = carregarListaVoos();
+
+		List<Voo> escalas = voos.stream().filter(voo -> isScalaFly(voo, origem, destino, dataVoo))
+				.collect(Collectors.toList());
+
+		List<Voo> voosUnicos = voos.stream().filter(voo -> isRightFly(voo, origem, destino, dataVoo))
+				.collect(Collectors.toList());
+		escalasOrganizadas.addAll(organizaEscala(escalas));
+
+		return escalasOrganizadas.size() == 0 ? voosUnicos : escalasOrganizadas;
+
+	}
+
 
 }
